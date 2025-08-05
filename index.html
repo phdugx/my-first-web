@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Web nền </title>
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            color: white;
+            background: linear-gradient(-45deg, #00c6ff, #7d2ae8, #ff7e5f, #feb47b);
+            background-size: 400% 400%;
+            animation: gradientMove 10s ease infinite;
+            transition: background 0.5s ease;
+        }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        h1 {
+            font-size: 40px;
+            margin-bottom: 20px;
+            animation: colorChange 3s infinite, glow 1.5s infinite alternate;
+        }
+        @keyframes colorChange {
+            0%   { color: #ff0000; }
+            25%  { color: #00ff00; }
+            50%  { color: #0000ff; }
+            75%  { color: #ff00ff; }
+            100% { color: #ff0000; }
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 5px white; }
+            to   { text-shadow: 0 0 20px white; }
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        button:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <h1 id="greeting"></h1>
+    <button onclick="changeBackground()">Đổi màu bất kì!</button>
+
+    <script>
+        // --- Hiển thị lời chào theo giờ ---
+        const greetingElement = document.getElementById("greeting");
+        const now = new Date();
+        const hour = now.getHours();
+
+        if (hour >= 5 && hour < 12) {
+            greetingElement.textContent = "🌞Buổi sáng tốt lành !";
+        } else if (hour >= 12 && hour < 18) {
+            greetingElement.textContent = "🌤 Chào buổi chiều thanh tình!";
+        } else {
+            greetingElement.textContent = "🌙 Chào buổi tối!";
+        }
+
+        // --- Hàm đổi màu nền ---
+        function changeBackground() {
+            const colors = [
+                "linear-gradient(-45deg, #00c6ff, #7d2ae8, #ff7e5f, #feb47b)",
+                "linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb)",
+                "linear-gradient(-45deg, #a1c4fd, #c2e9fb, #667eea, #764ba2)",
+                "linear-gradient(-45deg, #f7971e, #ffd200, #f37335, #fdc830)",
+                "linear-gradient(-45deg, #c31432, #240b36, #000000, #434343)"
+            ];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.style.background = randomColor;
+            document.body.style.backgroundSize = "400% 400%";
+            document.body.style.animation = "gradientMove 10s ease infinite";
+        }
+    </script>
+</body>
+</html>
